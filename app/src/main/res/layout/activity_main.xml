@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dhw.fresco.MainActivity">
+<!--
+    （1）在xml布局文件中, 先加入命名空间 xmlns:fresco="http://schemas.android.com/apk/res-auto"  ，再引用控件SimpleDraweeView；
+     (2)Drawees 不支持 wrap_content 属性;只有希望显示固定的宽高比时，可以使用wrap_content。但是只使用wrap_content时图片不会显示加载；
+     (3)如果希望图片以特定的宽高比例显示，例如 4:3，可以在XML中指定 fresco:viewAspectRatio="1.33"。
+        也可以在在代码中指定显示比例 4:3 ：draweeView.setAspectRatio(1.33f);
+
+        a.占位图                 fresco:placeholderImage
+          占位图缩放类型          fresco:placeholderImageScaleType
+
+        b.实际图片缩放类型        fresco:actualImageScaleType
+
+        c.正在加载图片的进度条图片 fresco:progressBarImage
+          正在加载图片的进度条缩放类型 fresco:progressBarImageScaleType
+          正在加载图片的进度条旋转间隔时间，直到实际图加载完毕  fresco:progressBarAutoRotateInterval
+
+        d.失败图                 fresco:failureImage
+          失败图缩放类型          fresco:failureImageScaleType
+
+        e.重试图                 fresco:retryImage="@drawable/retry_image"
+           重试图缩放类型         fresco:retryImageScaleType="centerCrop"
+          * 重复加载4次还是没有加载出来的时候才会显示 failureImage(失败图) 的图片*
+
+        f. 淡入淡出动画           fresco:fadeDuration="5000"   设置此属性后直到实际图片完全加载完毕都会受到此影响。
+
+        g. 背景图                fresco:backgroundImage(这里的背景图采用的是一个系统所提供的颜色中的一种。)
+
+        h. 叠加图                fresco:overlayImage (这里的叠加图采用的是一个系统所提供的颜色中的一种。)
+           按压状态下叠加图       fresco:pressedStateOverlayImage（从运行效果来看，叠加图在最上面，覆盖了下面的图。）
+                                fresco:overlayImage="@android:color/darker_gray"
+                                fresco:pressedStateOverlayImage="@android:color/holo_green_dark"
+
+        i. 圆形图                fresco:roundAsCircle（一行代码搞定圆形图：设置roundAsCircle为true；）（需要把叠加图去除）
+                                fresco:roundAsCircle="true"
+           可以看到，从图片开始加载一直到图片下载完毕，整个图像都是圆形的。
+
+        j. 圆角图                fresco:roundedCornerRadius(圆角图半径)  （需要把圆形图去除）
+                                fresco:roundTopLeft="true"          左上角是否为圆角
+                                fresco:roundTopRight="true"         右上角是否为圆角
+                                fresco:roundBottomLeft="true"       左下角是否为圆角
+                                fresco:roundBottomRight="true"      右下角是否为圆角
+                                这四个属性都为true，可省略不写
+           可以看到，从图片开始加载一直到图片下载完毕，整个图像都是圆角的。
+           * 当我们同时设置图像显示为圆形图像和圆角图像时，只会显示为圆形图像。
+
+        k.圆形圆角边框宽度及颜色—roundingBorder：
+           圆形圆角边框宽度    fresco:roundingBorderWidth="10dp"
+           圆形圆角边框颜色    fresco:roundingBorderColor="@android:color/holo_orange_dark"
+
+       l.圆形或圆角图像底下的叠加颜色—roundWithOverlayColor：
+           千万不能使用图片    fresco:roundWithOverlayColor="@android:color/holo_purple"
+
+-->
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/my_Imageview"
+        android:layout_width="188dp"
+        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+
+        fresco:viewAspectRatio="1.33"
+
+        fresco:placeholderImage="@drawable/placeholder_image"
+        fresco:placeholderImageScaleType="fitCenter"
+
+        fresco:actualImageScaleType="focusCrop"
+
+        fresco:progressBarImage="@drawable/icon_progress_bar"
+        fresco:progressBarAutoRotateInterval="50000"
+        fresco:progressBarImageScaleType="centerInside"
+
+        fresco:failureImage="@drawable/load_error_image"
+        fresco:failureImageScaleType="fitCenter"
+
+        fresco:retryImage="@drawable/retry_image"
+        fresco:retryImageScaleType="centerCrop"
+
+        fresco:fadeDuration="5000"
+
+        fresco:backgroundImage="@android:color/holo_blue_bright"
+
+        fresco:roundedCornerRadius="28dp"
+        fresco:roundTopLeft="true"
+        fresco:roundTopRight="true"
+        fresco:roundBottomLeft="true"
+        fresco:roundBottomRight="false"
+
+        fresco:roundingBorderWidth="10dp"
+        fresco:roundingBorderColor="@android:color/holo_orange_dark"
+
+        fresco:roundWithOverlayColor="@android:color/holo_purple"
+        />
+
+    <LinearLayout
+        android:layout_below="@+id/my_Imageview"
+        android:id="@+id/activity_fresco_gif"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/my_fresco_gif"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="18dp"
+                android:layout_gravity="center"
+                fresco:placeholderImage="@drawable/placeholder_image" />
+
+            <Button
+                android:id="@+id/bt_fresco_askImg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:text="请求gif图片" />
+
+            <Button
+                android:id="@+id/bt_fresco_startAnim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="动画开始" />
+
+            <Button
+                android:id="@+id/bt_fresco_stopAnim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="动画停止" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/activity_fresco_gif"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="18dp">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/fresco_rotate_view"
+            android:layout_gravity="center_vertical"
+            fresco:placeholderImage="@drawable/placeholder_image" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+            <Button
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="66dp"
+                android:layout_marginTop="50dp"
+                android:text="修改内存中图片大小"
+                android:onClick="resizeImage"
+                android:layout_width="188dp"/>
+            <Button
+                android:text="旋转图片"
+                android:layout_width="188dp"
+                android:onClick="rotateImage"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="66dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
